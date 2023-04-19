@@ -1,0 +1,41 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" href="../static/css/main.css"  />
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>MODSEN: Конвертер валют</h1>
+    <div>
+        <form th:action="@{/index/currency}" th:object="${currency}" th:method="post">
+            <select class="form-control" name="currency">
+                <option value="">Select currency</option>
+                <option th:each="cur : ${currency}"
+                        th:value="${cur.getName()}"
+                        th:text="${cur.getName()}">
+                </option>
+            </select>
+            </br>
+            <input type="text" name="value"/>
+            <input class="button" type ="submit" value ="result"/>
+    <!--        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>-->
+        </form>
+        <h1 th:text="${result}"></h1>
+        <table>
+            <tbody>
+            <tr>
+                <th></th>
+                <th>Продажа</th>
+                <th>Покупка</th>
+            </tr>
+            <tr th:each="cur: ${currency}">
+                <td th:text="${cur.getName()}">Audi</td>
+                <td th:text="${cur.getSale()}">Audi</td>
+                <td th:text="${cur.getPurchase()}">Audi</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
